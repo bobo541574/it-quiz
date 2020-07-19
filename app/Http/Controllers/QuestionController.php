@@ -7,6 +7,7 @@ use App\Question;
 use App\Category;
 use App\Level;
 use Illuminate\Support\Facades\DB;
+
 class QuestionController extends Controller
 {
     /**
@@ -14,11 +15,11 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct($value='')
+    public function __construct($value = '')
     {
         $this->middleware('auth');
     }
-    
+
 
     public function index()
     {
@@ -26,7 +27,7 @@ class QuestionController extends Controller
         $questions = Question::all();
         $category_level = DB::table('category_level', request('id'))->get();
         // var_dump($category_level);
-        return view('question.read', compact('questions','category_level'));
+        return view('question.read', compact('questions', 'category_level'));
     }
 
     /**
@@ -34,18 +35,19 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(){
+    public function create()
+    {
 
-        
+
         $sql = 'SELECT * FROM category_level';
 
         $categorylevels = DB::select($sql);
 
-       
+
         $questions = Question::all();
 
 
-        return view('question.create', compact('categorylevels','questions'));
+        return view('question.create', compact('categorylevels', 'questions'));
     }
 
     /**
@@ -58,38 +60,36 @@ class QuestionController extends Controller
     {
         //
         //validation
-        // dd($request);
         $request->validate([
             "question_name" => 'required',
-            "categorylevel"=>'required',
+            "categorylevel" => 'required',
             "answer1" => 'required',
             "answer2" => 'required',
             "answer3" => 'required',
             "rightanswer" => 'required',
-            
+
         ]);
 
-            if(request('rightanswer')==1){
-               $rightanswer=request('answer1');
-            }else if(request('rightanswer')==2){
-                $rightanswer=request('answer2');
-            }else(request('rightanswer')==3){
-                $rightanswer=request('answer3')
-            };
+        if (request('rightanswer') == 1) {
+            $rightanswer = request('answer1');
+        } else if (request('rightanswer') == 2) {
+            $rightanswer = request('answer2');
+        } else if (request('rightanswer') == 3) {
+            $rightanswer = request('answer3');
+        }
+
         //Create
-        // dd($request);
         Question::create([
-            "question_name" =>request('question_name'),
-            "categorylevel_id"=>request('categorylevel'),
-            "answer1" =>request('answer1'),
-            "answer2" =>request('answer2'),
-            "answer3" =>request('answer3'),
+            "question_name" => request('question_name'),
+            "categorylevel_id" => request('categorylevel'),
+            "answer1" => request('answer1'),
+            "answer2" => request('answer2'),
+            "answer3" => request('answer3'),
             "rightanswer" => $rightanswer,
-            
+
         ]);
 
         return redirect()->route('question.index');
-        
     }
 
     /**
@@ -138,13 +138,13 @@ class QuestionController extends Controller
             // "level_id"=>'',
         ]);
 
-        if(request('rightanswer')==1){
-               $rightanswer=request('answer1');
-            }else if(request('rightanswer')==2){
-                $rightanswer=request('answer2');
-            }else(request('rightanswer')==3){
-                $rightanswer=request('answer3')
-            };
+        if (request('rightanswer') == 1) {
+            $rightanswer = request('answer1');
+        } else if (request('rightanswer') == 2) {
+            $rightanswer = request('answer2');
+        } else if (request('rightanswer') == 3) {
+            $rightanswer = request('answer3');
+        }
         //update
 
         $question = Question::find($id);
@@ -153,7 +153,7 @@ class QuestionController extends Controller
         $question->answer2 = request('answer2');
         $question->answer3 = request('answer3');
         $question->rightanswer = $rightanswer;
-        
+
         $question->save();
         //Redirect
         return redirect()->route('question.index');
