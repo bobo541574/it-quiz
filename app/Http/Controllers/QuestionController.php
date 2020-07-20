@@ -24,7 +24,7 @@ class QuestionController extends Controller
     public function index()
     {
         //
-        $questions = Question::all();
+        $questions = Question::latest()->paginate(10);
         $category_level = DB::table('category_level', request('id'))->get();
         // var_dump($category_level);
         return view('question.read', compact('questions', 'category_level'));

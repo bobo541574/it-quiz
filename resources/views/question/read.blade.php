@@ -32,7 +32,7 @@
                                  
                 @foreach($questions as $question)
                 <tr>
-                    <td>{{$i}}</td>
+                    <td>{{$question->id}}</td>
                     <td>{{$question->question_name}}</td>
                     <td>{{$question->categorylevel_id}}</td>
                     <td>{{$question->rightanswer}}</td>
@@ -55,21 +55,19 @@
                 
                 @endphp
                 @endforeach
-                
-                
-                
+
             </tbody>
             
         </table>
         
     </div>
+    <div class="mx-auto">{{ $questions->onEachSide(1)->links() }}</div>
+    
 </div>
 
 @endsection
 
-
 @section('script')
-
 
 <script type="text/javascript">
 
@@ -80,23 +78,8 @@
       }
     });
 
-
-        
-            
-        
-    
-    });
-
-
-    
-
-
-
-    
-  
+    });  
 </script>
-
-  
 
 @endsection
 
