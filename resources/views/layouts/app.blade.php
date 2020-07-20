@@ -4,6 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <meta name="description" content="IT QUIZ FORWARD. - See m" />
+    <meta name="keywords" content="IT TEST, it test, IT QUIZ, it quiz, It Test, It Quiz, IT TEST FORWARD, it test forward, IT QUIZ FORWARD, it quiz forward" />
+    <meta name="author" content="metatags generator">
+    <meta name="robots" content="index, follow">
+    <meta name="revisit-after" content="3 days">
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
